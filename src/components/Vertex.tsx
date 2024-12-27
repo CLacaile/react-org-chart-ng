@@ -8,15 +8,15 @@ interface VertexProps {
 }
 
 function Vertex({ x, y, childX, childY }: VertexProps) {
+    const midX = childX;
+    const midY = childY  - CONSTANTS.treeLevelSpacing/2;
     return (
-        <line
-            x1={x}
-            y1={y + CONSTANTS.nodeHeight}
-            x2={childX}
-            y2={childY}
+        <path
+            d={`M${x},${y} V${midY} H${midX} V${childY}`}
+            fill="none"
             stroke={CONSTANTS.vertexStrokeColor}
             strokeWidth="1"
-          />
+        />
     )
 };
 

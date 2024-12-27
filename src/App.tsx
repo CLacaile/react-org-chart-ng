@@ -14,10 +14,7 @@ const data = {
     },
     {
       text: "Sophie",
-      children: [
-        { text: "Paul", children: [] },
-        { text: "Laura", children: [] },
-      ]
+      children: []
     },
     {
       text: "Marie",

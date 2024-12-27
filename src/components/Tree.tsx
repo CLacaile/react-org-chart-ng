@@ -24,7 +24,7 @@ function Tree({ data, x = 600, y = 60 }: TreeProps) {
       {/* Dessiner les liens et les sous-arbres */}
       {childPositions.map(({ child, x: childX, y: childY }, index) => (
         <g key={index}>
-          <Vertex x={x} y={y} childX={childX} childY={childY}/>
+          <Vertex x={x} y={y + CONSTANTS.nodeHeight} childX={childX} childY={childY}/>
           <Tree data={child} x={childX} y={childY} />
         </g>
       ))}

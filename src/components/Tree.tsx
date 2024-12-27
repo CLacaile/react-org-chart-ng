@@ -4,6 +4,7 @@ import * as CONSTANTS from "../utils/constants";
 import { useChildPositions } from "../hooks/useChildPositions";
 import { useMemo } from "react";
 import { getSubtreeWidth } from "../utils/treeUtils";
+import Vertex from "./Vertex";
 
 interface TreeProps {
   data: NodeData;
@@ -20,17 +21,10 @@ function Tree({ data, x = 600, y = 60 }: TreeProps) {
 
   return (
     <g>
-      {/* Dessiner les liens */}
+      {/* Dessiner les liens et les sous-arbres */}
       {childPositions.map(({ child, x: childX, y: childY }, index) => (
         <g key={index}>
-          <line
-            x1={x}
-            y1={y + CONSTANTS.nodeHeight}
-            x2={childX}
-            y2={childY}
-            stroke={CONSTANTS.vertexStrokeColor}
-            strokeWidth="1"
-          />
+          <Vertex x={x} y={y} childX={childX} childY={childY}/>
           <Tree data={child} x={childX} y={childY} />
         </g>
       ))}

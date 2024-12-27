@@ -14,3 +14,14 @@ export function getSubtreeWidth(node: NodeData, nodeWidth: number, siblingSpacin
 
   return childrenWidth + spacing;
 }
+
+export function getTreeDimensions(data: NodeData, nodeWidth: number, nodeHeight: number, levelSpacing: number, siblingSpacing: number) {
+  const treeWidth = getSubtreeWidth(data, nodeWidth, siblingSpacing); // Largeur totale
+  const treeHeight = getTreeDepth(data) * (nodeHeight + levelSpacing); // Hauteur totale
+  return { treeWidth, treeHeight };
+}
+
+export function getTreeDepth(data: NodeData): number {
+  if (data.children.length === 0) return 1;
+  return 1 + Math.max(...data.children.map(getTreeDepth));
+}

@@ -1,7 +1,7 @@
 import Node from "./Node";
 import { NodeData } from "./Node";
-import * as CONSTANTS from "./utils/constants";
-import { getSubtreeWidth } from "./utils/treeUtils";
+import * as CONSTANTS from "../utils/constants";
+import { getSubtreeWidth } from "../utils/treeUtils";
 
 interface TreeProps {
   data: NodeData;

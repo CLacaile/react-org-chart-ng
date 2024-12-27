@@ -1,4 +1,4 @@
-import * as CONSTANTS from './utils/constants';
+import * as CONSTANTS from '../utils/constants';
 
 interface NodeProps {
   x: number;

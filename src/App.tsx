@@ -1,5 +1,5 @@
 import "./App.css";
-import OrgChart from "./OrgChart";
+import OrgChart from "./components/OrgChart";
 
 const data = {
   text: "Jean-Patrick",

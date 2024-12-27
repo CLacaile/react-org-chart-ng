@@ -1,5 +1,5 @@
 import Tree from "./Tree";
-import { NodeData } from "./Node";
+import { NodeData } from "./components/Node";
 
 interface OrgChartProps {
   data: NodeData;

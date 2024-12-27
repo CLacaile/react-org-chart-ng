@@ -1,4 +1,4 @@
-import { NodeData } from '../Node';
+import { NodeData } from '../components/Node';
 
 export function getSubtreeWidth(node: NodeData, nodeWidth: number, siblingSpacing: number): number {
   if (node.children.length === 0) {

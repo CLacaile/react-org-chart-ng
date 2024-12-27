@@ -1,9 +1,16 @@
 import { NodeData } from '../Node';
 
-export function getSubtreeWidth(node: NodeData, leafWidth: number): number {
+export function getSubtreeWidth(node: NodeData, nodeWidth: number, siblingSpacing: number): number {
   if (node.children.length === 0) {
-    return leafWidth; // Une feuille a une largeur fixe
+    return nodeWidth; // Une feuille a une largeur fixe
   }
-  // Largeur totale des sous-arbres des enfants
-  return node.children.reduce((acc, child) => acc + getSubtreeWidth(child, leafWidth), 0);
+
+  // Largeur totale des enfants + espacement
+  return (
+    node.children.reduce(
+      (acc, child) => acc + getSubtreeWidth(child, nodeWidth, siblingSpacing),
+      0
+    ) +
+    (node.children.length - 1) * siblingSpacing
+  );
 }

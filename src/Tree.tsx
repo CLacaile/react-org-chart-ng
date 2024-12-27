@@ -9,14 +9,14 @@ interface TreeProps {
   y?: number;
 }
 
-function Tree({ data, x = 500, y = 60 }: TreeProps) {
+function Tree({ data, x = 600, y = 60 }: TreeProps) {
   // Vérifie si le nœud est une feuille
   const isLeaf = data.children.length === 0;
 
   // Largeur totale des enfants
   const subtreeWidth = isLeaf
     ? CONSTANTS.nodeWidth
-    : data.children.reduce((acc, child) => acc + getSubtreeWidth(child, CONSTANTS.nodeWidth), 0);
+    : data.children.reduce((acc, child) => acc + getSubtreeWidth(child, CONSTANTS.nodeWidth, CONSTANTS.treeSiblingSpacing), 0) + (data.children.length - 1) * CONSTANTS.treeSiblingSpacing;
 
   // Position X de départ pour les enfants
   let childXStart = x - subtreeWidth / 2;
@@ -25,12 +25,12 @@ function Tree({ data, x = 500, y = 60 }: TreeProps) {
     <g>
       {/* Dessiner les liens entre le parent et les enfants */}
       {data.children.map((child, index) => {
-        const childSubtreeWidth = getSubtreeWidth(child, CONSTANTS.nodeWidth);
+        const childSubtreeWidth = getSubtreeWidth(child, CONSTANTS.nodeWidth, CONSTANTS.treeSiblingSpacing);
         const childX = childXStart + childSubtreeWidth / 2;
         const childY = y + CONSTANTS.nodeHeight + CONSTANTS.treeLevelSpacing;
 
         // Met à jour la position de départ pour le prochain enfant
-        childXStart += childSubtreeWidth;
+        childXStart += childSubtreeWidth + CONSTANTS.treeSiblingSpacing;
 
         return (
           <g key={index}>

@@ -7,4 +7,4 @@ export const nodeTextColor = "#3E3E3E";
 export const vertexStrokeColor = "#797979";
 
 export const treeLevelSpacing = 50;
-export const treeSiblingSpacing = 200;
+export const treeSiblingSpacing = 25;

@@ -10,18 +10,22 @@ export function useChildPositions(
   parent: NodeData,
   parentX: number,
   parentY: number,
-  parentSubtreeWidth: number
+  parentSubtreeWidth: number,
+  nodesExpansionMap: Map<number, boolean>
 ) {
+  const isLeaf = parent.children.length === 0;
+  const isExpanded = nodesExpansionMap.get(parent.id) || false;
+
   return useMemo(() => {
-    const isLeaf = parent.children.length === 0;
-    if (isLeaf) {
+    
+    if (!isExpanded || isLeaf) {
       return [];
     }
 
     let childXStart = parentX - parentSubtreeWidth / 2;
 
     return parent.children.map((child) => {
-      const childSubtreeWidth = getSubtreeWidth(child, CONSTANTS.nodeWidth, CONSTANTS.treeSiblingSpacing);
+      const childSubtreeWidth = getSubtreeWidth(child, CONSTANTS.nodeWidth, nodesExpansionMap, CONSTANTS.treeSiblingSpacing);
       const childX = childXStart + childSubtreeWidth / 2;
       const childY = parentY + CONSTANTS.nodeHeight + CONSTANTS.treeLevelSpacing;
 
@@ -29,5 +33,5 @@ export function useChildPositions(
 
       return { child, x: childX, y: childY };
     });
-  }, [parent, parentX, parentY, parentSubtreeWidth]);
+  }, [parent, parentX, parentY, parentSubtreeWidth, nodesExpansionMap, isExpanded, isLeaf]);
 }

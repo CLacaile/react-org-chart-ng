@@ -1,40 +1,33 @@
-import { useState } from "react";
 import Node from "./Node";
 import { NodeData } from "./Node";
 import * as CONSTANTS from "../utils/constants";
 import { useChildPositions } from "../hooks/useChildPositions";
-import { useMemo } from "react";
-import { getSubtreeWidth } from "../utils/treeUtils";
 import Vertex from "./Vertex";
+import { useSubtreeWidth } from "../hooks/useSubtreeWidth";
 
 interface TreeProps {
-  data: NodeData;
+  parent: NodeData;
   x: number;
   y: number;
+  nodesExpansionMap: Map<number, boolean>;
+  toggleNodeExpansion: (nodeId: number) => void;
 }
 
-function Tree({ data, x, y }: TreeProps) {
-  const [expanded, setExpanded] = useState(false);
-  const isLeaf = data.children.length === 0;
-  const subtreeWidth = useMemo(() => getSubtreeWidth(data, CONSTANTS.nodeWidth, CONSTANTS.treeSiblingSpacing), [data]);
-  const childPositions = useChildPositions(data, x, y, subtreeWidth);
-
-  const handleNodeClick = () => {
-    if (!isLeaf) {
-      setExpanded(!expanded);
-    }
-  }
+function Tree({ parent, x, y, nodesExpansionMap, toggleNodeExpansion }: TreeProps) {
+  const isExpanded = nodesExpansionMap.get(parent.id);
+  const subtreeWidth = useSubtreeWidth(parent, nodesExpansionMap);
+  const childPositions = useChildPositions(parent, x, y, subtreeWidth, nodesExpansionMap);
 
   return (
     <g>
-      {/* Dessiner le nœud */}
-      <Node x={x} y={y} text={data.text} onClick={handleNodeClick}/>
+      {/* Dessiner le nœud parent */}
+      <Node x={x} y={y} text={parent.text} onClick={() => toggleNodeExpansion(parent.id)}/>
 
       {/* Dessiner les liens et les sous-arbres */}
-      {expanded && childPositions.map(({ child, x: childX, y: childY }, index) => (
+      {isExpanded && childPositions.map(({ child, x: childX, y: childY }, index) => (
         <g key={index}>
           <Vertex x={x} y={y + CONSTANTS.nodeHeight} childX={childX} childY={childY}/>
-          <Tree data={child} x={childX} y={childY} />
+          <Tree parent={child} x={childX} y={childY} nodesExpansionMap={nodesExpansionMap} toggleNodeExpansion={toggleNodeExpansion}/>
         </g>
       ))}
     </g>

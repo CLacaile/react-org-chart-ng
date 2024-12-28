@@ -1,12 +1,11 @@
 import { useState, useEffect, useMemo } from "react";
 import { getTreeDimensions } from "../utils/treeUtils";
+import * as CONSTANTS from "../utils/constants";
+import { NodeData } from "../components/Node";
 
 interface UseAutoZoomParams {
-  data: any; // Structure de l'arbre
-  nodeWidth: number;
-  nodeHeight: number;
-  treeLevelSpacing: number;
-  treeSiblingSpacing: number;
+  data: NodeData; // Structure de l'arbre
+  expansionMap: Map<number, boolean>;
 }
 
 /**
@@ -18,7 +17,7 @@ interface UseAutoZoomParams {
  * @param treeSiblingSpacing Espacement horizontal entre frères et sœurs
  * @returns 
  */
-export function useAutoZoom({ data, nodeWidth, nodeHeight, treeLevelSpacing, treeSiblingSpacing }: UseAutoZoomParams) {
+export function useAutoZoom({ data, expansionMap }: UseAutoZoomParams) {
   const [dimensions, setDimensions] = useState({
     screenWidth: window.innerWidth,
     screenHeight: window.innerHeight,
@@ -45,8 +44,8 @@ export function useAutoZoom({ data, nodeWidth, nodeHeight, treeLevelSpacing, tre
 
   // Calcul dynamique des dimensions de l'arbre
   const { treeWidth, treeHeight } = useMemo(() => {
-    return getTreeDimensions(data, nodeWidth, nodeHeight, treeLevelSpacing, treeSiblingSpacing);
-  }, [data, nodeWidth, nodeHeight, treeLevelSpacing]);
+    return getTreeDimensions(data, CONSTANTS.nodeWidth, CONSTANTS.nodeHeight, expansionMap, CONSTANTS.treeLevelSpacing, CONSTANTS.treeSiblingSpacing);
+  }, [data, expansionMap]);
 
   // Calcul de l'échelle pour ajuster l'arbre à l'écran
   const scale = useMemo(() => {

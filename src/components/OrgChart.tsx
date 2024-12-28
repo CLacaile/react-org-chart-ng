@@ -1,7 +1,7 @@
 import Tree from "./Tree";
 import { NodeData } from "../components/Node";
 import { useAutoZoom } from "../hooks/useAutoZoom";
-import * as CONSTANTS from "../utils/constants";
+import { useExpansionMap } from "../hooks/useExpansionMap";
 
 interface OrgChartProps {
   data: NodeData;
@@ -11,23 +11,16 @@ interface OrgChartProps {
   siblingSpacing?: number; // Espacement horizontal entre frères et sœurs
 }
 
-function OrgChart({
-  data
-}: OrgChartProps) {
-  const { scale, translateX, translateY, screenWidth, screenHeight } = useAutoZoom({
-    data,
-    nodeWidth: CONSTANTS.nodeWidth,
-    nodeHeight: CONSTANTS.nodeHeight,
-    treeLevelSpacing: CONSTANTS.treeLevelSpacing,
-    treeSiblingSpacing: CONSTANTS.treeSiblingSpacing
-  });
-  
+function OrgChart({ data }: OrgChartProps) {
+  const { expansionMap, toggleNodeExpansion } = useExpansionMap();
+  const { scale, translateX, translateY, screenWidth, screenHeight } = useAutoZoom({data, expansionMap});
+
   return (
     <svg width="100%" height="100vh" viewBox={`0 0 ${screenWidth} ${screenHeight}`}>
       <g
         transform={`scale(${scale}) translate(${translateX}, ${translateY})`}
       >
-        <Tree data={data} x={screenWidth/2} y={10} />
+        <Tree parent={data} x={400} y={10} nodesExpansionMap={expansionMap} toggleNodeExpansion={toggleNodeExpansion}/>
       </g>
     </svg>
   );

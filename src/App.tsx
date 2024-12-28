@@ -1,5 +1,6 @@
 import "./App.css";
 import OrgChart from "./components/OrgChart";
+import { useControls } from "./hooks/useControls";
 
 const data = {
   id: 1,
@@ -17,7 +18,7 @@ const data = {
     {
       id: 3,
       text: "Sophie",
-      children: []
+      children: [],
     },
     {
       id: 4,
@@ -31,8 +32,12 @@ const data = {
 };
 
 function App() {
+  const { transform, handlers } = useControls();
+
   return (
-    <OrgChart data={data} />
+    <svg width="100%" height="100%" style={{ overflow: "hidden" }} {...handlers}>
+      <OrgChart data={data} position={transform.position} scale={transform.scale} />
+    </svg>
   );
 }
 

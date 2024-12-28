@@ -12,8 +12,6 @@ export function getSubtreeWidth(node: NodeData, nodeWidth: number, nodesExpansio
   const isLeaf = node.children.length === 0;
   const isExpanded = nodesExpansionMap.get(node.id) || false;
 
-  console.log(`Appel de getSubtreeWidth pour le nœud ${node.text} depuis`, new Error().stack);
-
   if (isLeaf || !isExpanded) {
     return nodeWidth; // Une feuille a une largeur fixe
   }

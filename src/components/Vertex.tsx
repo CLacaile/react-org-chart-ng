@@ -15,6 +15,7 @@ function Vertex({ originId, originX, originY, destId, destX, destY }: VertexProp
     return (
         <path
             id={`vertex-${originId}-${destId}`}
+            data-testid={`vertex-${originId}-${destId}`}
             d={`M${originX},${originY} V${midY} H${midX} V${destY}`}
             fill="none"
             stroke={CONSTANTS.vertexStrokeColor}

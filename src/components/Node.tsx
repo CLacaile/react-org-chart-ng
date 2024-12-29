@@ -1,6 +1,7 @@
 import * as CONSTANTS from "../utils/constants";
 
 interface NodeProps {
+  id: number;
   x: number;
   y: number;
   text: string;
@@ -13,14 +14,15 @@ export interface NodeData {
   children: NodeData[];
 }
 
-function Node({ x, y, text, onClick }: NodeProps) {
+function Node({ id, x, y, text, onClick }: NodeProps) {
   const rectWidth = CONSTANTS.nodeWidth;
   const rectHeight = CONSTANTS.nodeHeight;
 
   return (
-    <g transform={`translate(${x - rectWidth / 2}, ${y})`} onClick={onClick} style={{ cursor: "pointer" }}>
+    <g id={`node-${id}`} transform={`translate(${x - rectWidth / 2}, ${y})`} onClick={onClick} style={{ cursor: "pointer" }}>
       {/* Conteneur du nœud */}
       <rect
+        className="node-container"
         width={rectWidth}
         height={rectHeight}
         stroke={CONSTANTS.nodeStrokeColor}
@@ -30,6 +32,7 @@ function Node({ x, y, text, onClick }: NodeProps) {
       />
       {/* Texte dans le nœud */}
       <text
+        className="node-text"
         x={rectWidth / 2}
         y={rectHeight / 2}
         textAnchor="middle"

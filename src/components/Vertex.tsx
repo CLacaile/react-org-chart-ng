@@ -1,18 +1,21 @@
 import * as CONSTANTS from '../utils/constants'
 
 interface VertexProps {
-    x: number,
-    y: number,
-    childX: number,
-    childY: number
+    originId: number,
+    originX: number,
+    originY: number,
+    destId: number,
+    destX: number,
+    destY: number
 }
 
-function Vertex({ x, y, childX, childY }: VertexProps) {
-    const midX = childX;
-    const midY = childY  - CONSTANTS.treeLevelSpacing/2;
+function Vertex({ originId, originX, originY, destId, destX, destY }: VertexProps) {
+    const midX = destX;
+    const midY = destY  - CONSTANTS.treeLevelSpacing/2;
     return (
         <path
-            d={`M${x},${y} V${midY} H${midX} V${childY}`}
+            id={`vertex-${originId}-${destId}`}
+            d={`M${originX},${originY} V${midY} H${midX} V${destY}`}
             fill="none"
             stroke={CONSTANTS.vertexStrokeColor}
             strokeWidth="1"

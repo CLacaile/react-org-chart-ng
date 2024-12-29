@@ -33,7 +33,7 @@ const data = {
 
 function App() {
   return (
-    <svg width="100%" height="100%" style={{ overflow: "hidden" }}>
+    <svg className="app-root-svg" width="100%" height="100%" style={{ overflow: "hidden" }}>
       <Controls>
         <OrgChart data={data} />
       </Controls>

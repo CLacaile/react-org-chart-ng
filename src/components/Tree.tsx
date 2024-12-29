@@ -19,14 +19,14 @@ function Tree({ parent, x, y, nodesExpansionMap, toggleNodeExpansion }: TreeProp
   const childPositions = useChildPositions(parent, x, y, subtreeWidth, nodesExpansionMap);
 
   return (
-    <g>
+    <g id={`tree-${parent.id}`}>
       {/* Dessiner le nœud parent */}
-      <Node x={x} y={y} text={parent.text} onClick={() => toggleNodeExpansion(parent.id)}/>
+      <Node id={parent.id} x={x} y={y} text={parent.text} onClick={() => toggleNodeExpansion(parent.id)}/>
 
       {/* Dessiner les liens et les sous-arbres */}
       {isExpanded && childPositions.map(({ child, x: childX, y: childY }, index) => (
-        <g key={index}>
-          <Vertex x={x} y={y + CONSTANTS.nodeHeight} childX={childX} childY={childY}/>
+        <g id={`subtree-${parent.id}-${index}`} key={index}>
+          <Vertex originId={parent.id} originX={x} originY={y + CONSTANTS.nodeHeight} destId={child.id} destX={childX} destY={childY}/>
           <Tree parent={child} x={childX} y={childY} nodesExpansionMap={nodesExpansionMap} toggleNodeExpansion={toggleNodeExpansion}/>
         </g>
       ))}

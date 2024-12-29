@@ -27,7 +27,7 @@ function Controls({ children }: ControlsProps) {
   }, []);
 
   return (
-    <g ref={gRef}>
+    <g className="controls" ref={gRef}>
       {children}
     </g>
   );

@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { getTreeDimensions } from "../utils/treeUtils";
 import * as CONSTANTS from "../utils/constants";
-import { NodeData } from "../components/Node";
+import { NodeData } from "../types/node";
 
 interface UseAutoZoomParams {
   data: NodeData; // Structure de l'arbre

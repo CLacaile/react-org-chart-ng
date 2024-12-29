@@ -1,4 +1,4 @@
-import { NodeData } from '../components/Node';
+import { NodeData } from '../types/node';
 
 /**
  * getSubtreeWidth calcule la largeur du sous-arbre pour un nœud donné.

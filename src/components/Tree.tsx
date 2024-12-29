@@ -1,5 +1,5 @@
 import Node from "./Node";
-import { NodeData } from "./Node";
+import { NodeData } from "../types/node";
 import * as CONSTANTS from "../utils/constants";
 import { useChildPositions } from "../hooks/useChildPositions";
 import Vertex from "./Vertex";

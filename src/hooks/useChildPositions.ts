@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { NodeData } from "../components/Node";
+import { NodeData } from "../types/node";
 import * as CONSTANTS from "../utils/constants";
 import { getSubtreeWidth } from "../utils/treeUtils";
 

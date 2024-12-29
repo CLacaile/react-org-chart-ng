@@ -1,5 +1,5 @@
 import Tree from "./Tree";
-import { NodeData } from "../components/Node";
+import { NodeData } from "../types/node";
 import { useExpansionMap } from "../hooks/useExpansionMap";
 
 interface OrgChartProps {

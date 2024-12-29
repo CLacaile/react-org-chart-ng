@@ -8,12 +8,6 @@ interface NodeProps {
   onClick?: () => void;
 }
 
-export interface NodeData {
-  id: number;
-  text: string;
-  children: NodeData[];
-}
-
 function Node({ id, x, y, text, onClick }: NodeProps) {
   const rectWidth = CONSTANTS.nodeWidth;
   const rectHeight = CONSTANTS.nodeHeight;

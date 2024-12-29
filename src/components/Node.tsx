@@ -13,7 +13,7 @@ function Node({ id, x, y, text, onClick }: NodeProps) {
   const rectHeight = CONSTANTS.nodeHeight;
 
   return (
-    <g id={`node-${id}`} transform={`translate(${x - rectWidth / 2}, ${y})`} onClick={onClick} style={{ cursor: "pointer" }}>
+    <g id={`node-${id}`} data-testid={`node-${id}`} transform={`translate(${x - rectWidth / 2}, ${y})`} onClick={onClick} style={{ cursor: "pointer" }}>
       {/* Conteneur du nœud */}
       <rect
         className="node-container"

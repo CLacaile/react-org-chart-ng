@@ -13,6 +13,7 @@ function OrgChart({ data, x = 0, y = 0, scale = 1 }: OrgChartProps) {
   const { expansionMap, toggleNodeExpansion } = useExpansionMap();
   return (
     <g
+      data-testid="org-chart"
       className="org-chart"
       transform={`scale(${scale}) translate(${window.innerWidth/2}, ${0})`}
     >

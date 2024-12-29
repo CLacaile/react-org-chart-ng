@@ -4,19 +4,20 @@ import { useExpansionMap } from "../hooks/useExpansionMap";
 
 interface OrgChartProps {
   data: NodeData;
-  position: { x: number; y: number };
-  scale: number;
+  x?: number; 
+  y?: number;
+  scale?: number;
 }
 
-function OrgChart({ data, position, scale }: OrgChartProps) {
+function OrgChart({ data, x = 0, y = 0, scale = 1 }: OrgChartProps) {
   const { expansionMap, toggleNodeExpansion } = useExpansionMap();
   return (
     <g
-      transform={`scale(${scale}) translate(${position.x}, ${position.y}) scale(${scale})`}
+      transform={`scale(${scale}) translate(${window.innerWidth/2}, ${0})`}
     >
       <Tree
-        x={0}
-        y={0}
+        x={x}
+        y={y}
         parent={data}
         nodesExpansionMap={expansionMap}
         toggleNodeExpansion={toggleNodeExpansion}

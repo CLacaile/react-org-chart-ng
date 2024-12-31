@@ -18,8 +18,8 @@ function OrgChart({ data, x = 0, y = 0, scale = 1 }: OrgChartProps) {
       transform={`scale(${scale}) translate(${window.innerWidth/2}, ${0})`}
     >
       <Tree
-        x={x}
-        y={y}
+        rootNodeX={x}
+        rootNodeY={y}
         rootNode={data}
         nodesExpansionMap={expansionMap}
         toggleNodeExpansion={toggleNodeExpansion}

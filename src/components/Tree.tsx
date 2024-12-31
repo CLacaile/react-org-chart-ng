@@ -4,20 +4,24 @@ import * as CONSTANTS from "../utils/constants";
 import { useChildPositions } from "../hooks/useChildPositions";
 import Vertex from "./Vertex";
 import { useSubtreeWidth } from "../hooks/useSubtreeWidth";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface TreeProps {
   rootNode: NodeData;
-  x: number;
-  y: number;
+  rootNodeX: number;
+  rootNodeY: number;
+  finalX?: number;
+  finalY?: number;
   nodesExpansionMap: Map<number, boolean>;
   toggleNodeExpansion: (nodeId: number) => void;
 }
 
 function Tree({
   rootNode,
-  x,
-  y,
+  rootNodeX,
+  rootNodeY,
+  finalX = rootNodeX,
+  finalY = rootNodeY,
   nodesExpansionMap,
   toggleNodeExpansion,
 }: TreeProps) {
@@ -26,53 +30,56 @@ function Tree({
   const subtreeWidth = useSubtreeWidth(rootNode, nodesExpansionMap);
   const childPositions = useChildPositions(
     rootNode,
-    x,
-    y,
+    rootNodeX,
+    rootNodeY,
     subtreeWidth,
     nodesExpansionMap
   );
 
   return (
-    <g id={`tree-${rootNode.id}`}>
-      {/* Dessiner le nœud parent */}
-      <Node
-        id={rootNode.id}
-        x={x}
-        y={y}
-        text={rootNode.text}
-        onClick={() => toggleNodeExpansion(rootNode.id)}
-      />
+    <AnimatePresence>
+      <motion.g 
+        id={`tree-${rootNode.id}`}
+        initial={{ x: rootNodeX, y: rootNodeY, opacity: 0 }} // Position initiale et invisible
+        animate={{ x: finalX, y: finalY, opacity: 1 }} // Position finale et visible
+        exit={{ x: rootNodeX, y: rootNodeY, opacity: 0 }} // Retourne à la position initiale et disparaît
+        transition={{ type: "spring", stiffness: 200, damping: 18 }}
+      >
+        {/* Dessiner le nœud parent */}
+        <Node
+          id={rootNode.id}
+          x={rootNodeX}
+          y={rootNodeY}
+          text={rootNode.text}
+          onClick={() => toggleNodeExpansion(rootNode.id)}
+        />
 
-      {/* Dessiner les liens et les sous-arbres */}
-      {isExpanded &&
-        childPositions.map(({ child, x: childX, y: childY }, index) => (
-          <g id={`subtree-${rootNode.id}-${index}`} key={index}>
-            <Vertex
-              originId={rootNode.id}
-              originX={x}
-              originY={y + CONSTANTS.nodeHeight}
-              destId={child.id}
-              destX={childX}
-              destY={childY}
-            />
-            <motion.g
-              id={`motion-subtree-${rootNode.id}-${index}`}
-              key={index}
-              initial={{ x: 0, y: 0 }}
-              animate={{ x: childX, y: childY }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            >
+        {/* Dessiner les liens et les sous-arbres */}
+        {isExpanded &&
+          childPositions.map(({ child, x: childX, y: childY }, index) => (
+            <motion.g id={`subtree-${rootNode.id}-${index}`} key={`subtree-${rootNode.id}-${index}`}>
+              <Vertex
+                originId={rootNode.id}
+                originX={rootNodeX}
+                originY={rootNodeY + CONSTANTS.nodeHeight}
+                destId={child.id}
+                destX={childX}
+                destY={childY}
+              />
               <Tree
                 rootNode={child}
-                x={0}
-                y={0}
+                rootNodeX={0}
+                rootNodeY={0}
+                finalX={rootNodeX + childX}
+                finalY={rootNodeY + childY}
                 nodesExpansionMap={nodesExpansionMap}
                 toggleNodeExpansion={toggleNodeExpansion}
               />
             </motion.g>
-          </g>
-        ))}
-    </g>
+          ))}
+      </motion.g>
+    </AnimatePresence>
+    
   );
 }
 

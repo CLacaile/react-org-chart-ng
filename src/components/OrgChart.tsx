@@ -20,7 +20,7 @@ function OrgChart({ data, x = 0, y = 0, scale = 1 }: OrgChartProps) {
       <Tree
         x={x}
         y={y}
-        parent={data}
+        rootNode={data}
         nodesExpansionMap={expansionMap}
         toggleNodeExpansion={toggleNodeExpansion}
       />

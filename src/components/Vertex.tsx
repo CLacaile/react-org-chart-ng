@@ -1,4 +1,5 @@
 import * as CONSTANTS from '../utils/constants'
+import { motion } from 'framer-motion';
 
 interface VertexProps {
     originId: number,
@@ -13,13 +14,17 @@ function Vertex({ originId, originX, originY, destId, destX, destY }: VertexProp
     const midX = destX;
     const midY = destY  - CONSTANTS.treeLevelSpacing/2;
     return (
-        <path
+        <motion.path
             id={`vertex-${originId}-${destId}`}
             data-testid={`vertex-${originId}-${destId}`}
             d={`M${originX},${originY} V${midY} H${midX} V${destY}`}
             fill="none"
             stroke={CONSTANTS.vertexStrokeColor}
             strokeWidth="1"
+            initial={{ scaleY: 0, opacity: 0 }}
+            animate={{ scaleY: 1, opacity: 1 }}
+            exit={{ pathLength: 0, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 200, damping: 20 }}
         />
     )
 };

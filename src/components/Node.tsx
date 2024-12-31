@@ -1,4 +1,5 @@
 import * as CONSTANTS from "../utils/constants";
+import { motion } from "framer-motion";
 
 interface NodeProps {
   id: number;
@@ -13,7 +14,15 @@ function Node({ id, x, y, text, onClick }: NodeProps) {
   const rectHeight = CONSTANTS.nodeHeight;
 
   return (
-    <g id={`node-${id}`} data-testid={`node-${id}`} transform={`translate(${x - rectWidth / 2}, ${y})`} onClick={onClick} style={{ cursor: "pointer" }}>
+    <motion.g 
+      id={`node-${id}`} 
+      data-testid={`node-${id}`} 
+      initial={{ opacity: 0, x: x - rectWidth / 2, y }}
+      animate={{ opacity: 1, x: x - rectWidth / 2, y }}
+      transition={{ type: "spring", stiffness: 200, damping: 18 }}
+      onClick={onClick} 
+      style={{ cursor: "pointer" }}
+    >
       {/* Conteneur du nœud */}
       <rect
         className="node-container"
@@ -35,7 +44,7 @@ function Node({ id, x, y, text, onClick }: NodeProps) {
       >
         {text}
       </text>
-    </g>
+    </motion.g>
   );
 }
 

@@ -21,10 +21,10 @@ function Vertex({ originId, originX, originY, destId, destX, destY }: VertexProp
             fill="none"
             stroke={CONSTANTS.vertexStrokeColor}
             strokeWidth="1"
-            initial={{ scaleY: 0, opacity: 0 }}
-            animate={{ scaleY: 1, opacity: 1 }}
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
             exit={{ pathLength: 0, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            transition={{ type: "spring", stiffness: 100, damping: 20 }}
         />
     )
 };

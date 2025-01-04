@@ -47,10 +47,9 @@ function Tree({
       >
         {/* Dessiner le nœud parent */}
         <Node
-          id={rootNode.id}
+          data={rootNode}
           x={rootNodeX}
           y={rootNodeY}
-          text={rootNode.text}
           onClick={() => toggleNodeExpansion(rootNode.id)}
         />
 

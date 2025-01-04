@@ -4,9 +4,9 @@ import { NODE_TEXT_COLOR } from "../utils/constants";
 
 interface TextWrapProps {
   text: string;
-  color: string;
-  font: string;
-  size: string;
+  color?: string;
+  font?: string;
+  size?: string;
   weight?: string;
   maxWidth: number;
   position: { x: number; y: number };
@@ -15,7 +15,7 @@ interface TextWrapProps {
 function TextWrap({
   text,
   color = NODE_TEXT_COLOR,
-  font,
+  font = "Gabarito",
   size = "normal",
   weight = "normal",
   position,

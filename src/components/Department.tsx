@@ -2,7 +2,7 @@ import { DARKGREY, WHITE } from "../utils/palette";
 import TextWrap from "./TextWrap";
 import { motion } from "framer-motion";
 
-interface OrganizationProps {
+interface DepartmentProps {
   text: string;
   x: number;
   y: number;
@@ -12,7 +12,7 @@ interface OrganizationProps {
   onClick?: () => void;
 }
 
-function Organization({
+function Department({
   text,
   x,
   y,
@@ -20,10 +20,10 @@ function Organization({
   height,
   minWidth = width,
   onClick,
-}: OrganizationProps) {
+}: DepartmentProps) {
   return (
     <motion.g
-      className="organization"
+      className="department"
       initial={{ x, y, filter: "none" }}
       whileHover={{
         x: x - 1,
@@ -51,4 +51,4 @@ function Organization({
   );
 }
 
-export default Organization;
+export default Department;

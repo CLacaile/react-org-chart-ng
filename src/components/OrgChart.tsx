@@ -1,9 +1,9 @@
 import Tree from "./Tree";
 import { NodeData } from "../types/node";
 import { useExpansionMap } from "../hooks/useExpansionMap";
-import Organization from "./Organization";
+import Department from "./Department";
 import { useTreeDimensions } from "../hooks/useTreeDimensions";
-import { ORG_MIN_HEIGHT, ORG_MIN_WIDTH, ORG_PADDING } from "../utils/constants";
+import { DEPT_MIN_HEIGHT, DEPT_MIN_WIDTH, DEPT_PADDING } from "../utils/constants";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { initializeExpansionMap } from "../utils/nodeUtils";
@@ -20,8 +20,8 @@ function OrgChart({ data, x = 0, y = 0, scale = 1 }: OrgChartProps) {
   const { treeWidth, treeHeight } = useTreeDimensions(data, nodesExpansionMap);
   const [showTree, setShowTree] = useState(false);
   const [orgDimensions, setOrgDimensions] = useState({
-    width: ORG_MIN_WIDTH,
-    height: ORG_MIN_HEIGHT,
+    width: DEPT_MIN_WIDTH,
+    height: DEPT_MIN_HEIGHT,
   });
 
   const handleOrgClick = () => {
@@ -31,11 +31,11 @@ function OrgChart({ data, x = 0, y = 0, scale = 1 }: OrgChartProps) {
   useEffect(() => {
     if (showTree) {
       setOrgDimensions({
-        width: treeWidth + ORG_PADDING,
-        height: treeHeight + ORG_PADDING,
+        width: treeWidth + DEPT_PADDING,
+        height: treeHeight + DEPT_PADDING,
       });
     } else {
-      setOrgDimensions({ width: ORG_MIN_WIDTH, height: ORG_MIN_HEIGHT });
+      setOrgDimensions({ width: DEPT_MIN_WIDTH, height: DEPT_MIN_HEIGHT });
     }
   }, [treeWidth, treeHeight, showTree]);
 
@@ -46,10 +46,10 @@ function OrgChart({ data, x = 0, y = 0, scale = 1 }: OrgChartProps) {
       initial={{ x: x + window.innerWidth / 2, y: y, scale: 0 }}
       animate={{ x: x + window.innerWidth / 2, y: y, scale }}
     >
-      <Organization
+      <Department
         text={"Organisation A"}
         x={x - orgDimensions.width / 2}
-        y={y - ORG_PADDING}
+        y={y - DEPT_PADDING}
         width={orgDimensions.width}
         height={orgDimensions.height}
         onClick={handleOrgClick}

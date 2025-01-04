@@ -6,9 +6,9 @@ export const NODE_BG_COLOR = "white";
 export const NODE_STROKE_COLOR = GREY
 export const NODE_TEXT_COLOR = DARKGREY;
 
-export const ORG_MIN_WIDTH = 200;
-export const ORG_MIN_HEIGHT = 50;
-export const ORG_PADDING = 60;
+export const DEPT_MIN_WIDTH = 200;
+export const DEPT_MIN_HEIGHT = 50;
+export const DEPT_PADDING = 60;
 
 export const VERTEX_STROKE_COLOR = GREY;
 

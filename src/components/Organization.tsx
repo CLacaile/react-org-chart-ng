@@ -1,5 +1,5 @@
 import { LIGHTBLUE } from "../utils/palette";
-import { organizationPadding } from "../utils/constants";
+import { ORG_PADDING } from "../utils/constants";
 
 interface OrganizationProps {
   width: number;
@@ -14,7 +14,7 @@ function Organization({ width, height, minWidth = width }: OrganizationProps) {
       height={height}
       rx="5"
       fill={LIGHTBLUE}
-      transform={`translate(${-width / 2}, ${-organizationPadding})`}
+      transform={`translate(${-width / 2}, ${-ORG_PADDING})`}
     />
   );
 }

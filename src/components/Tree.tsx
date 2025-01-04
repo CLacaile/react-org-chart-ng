@@ -1,10 +1,10 @@
 import Node from "./Node";
 import { NodeData } from "../types/node";
-import * as CONSTANTS from "../utils/constants";
 import { useChildPositions } from "../hooks/useChildPositions";
 import Vertex from "./Vertex";
 import { useSubtreeWidth } from "../hooks/useSubtreeWidth";
 import { AnimatePresence, motion } from "framer-motion";
+import { NODE_HEIGHT } from "../utils/constants";
 
 interface TreeProps {
   rootNode: NodeData;
@@ -60,7 +60,7 @@ function Tree({
               <Vertex
                 originId={rootNode.id}
                 originX={rootNodeX}
-                originY={rootNodeY + CONSTANTS.nodeHeight}
+                originY={rootNodeY + NODE_HEIGHT}
                 destId={child.id}
                 destX={childX}
                 destY={childY}

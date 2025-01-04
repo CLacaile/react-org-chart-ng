@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { NodeData } from "../types/node";
-import * as CONSTANTS from "../utils/constants";
 import { getSubtreeWidth } from "../utils/treeUtils";
+import { NODE_WIDTH, TREE_SIBLING_SPACING, NODE_HEIGHT, TREE_LEVEL_SPACING } from "../utils/constants";
 
 /**
  * Calculer les positions des enfants d'un nœud.
@@ -25,11 +25,11 @@ export function useChildPositions(
     let childXStart = parentX - parentSubtreeWidth / 2;
 
     return parent.children.map((child) => {
-      const childSubtreeWidth = getSubtreeWidth(child, CONSTANTS.nodeWidth, nodesExpansionMap, CONSTANTS.treeSiblingSpacing);
+      const childSubtreeWidth = getSubtreeWidth(child, NODE_WIDTH, nodesExpansionMap, TREE_SIBLING_SPACING);
       const childX = childXStart + childSubtreeWidth / 2;
-      const childY = parentY + CONSTANTS.nodeHeight + CONSTANTS.treeLevelSpacing;
+      const childY = parentY + NODE_HEIGHT + TREE_LEVEL_SPACING;
 
-      childXStart += childSubtreeWidth + CONSTANTS.treeSiblingSpacing;
+      childXStart += childSubtreeWidth + TREE_SIBLING_SPACING;
 
       return { child, x: childX, y: childY };
     });

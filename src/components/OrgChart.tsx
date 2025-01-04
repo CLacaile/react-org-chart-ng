@@ -3,7 +3,7 @@ import { NodeData } from "../types/node";
 import { useExpansionMap } from "../hooks/useExpansionMap";
 import Organization from "./Organization";
 import { useTreeDimensions } from "../hooks/useTreeDimensions";
-import { organizationPadding } from "../utils/constants";
+import { ORG_PADDING } from "../utils/constants";
 
 interface OrgChartProps {
   data: NodeData;
@@ -22,7 +22,7 @@ function OrgChart({ data, x = 0, y = 0, scale = 1 }: OrgChartProps) {
       className="org-chart"
       transform={`scale(${scale}) translate(${window.innerWidth/2}, ${0})`}
     >
-      <Organization width={treeWidth + organizationPadding} height={treeHeight + organizationPadding} />
+      <Organization width={treeWidth + ORG_PADDING} height={treeHeight + ORG_PADDING} />
       <Tree
         rootNodeX={x}
         rootNodeY={y}

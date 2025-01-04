@@ -1,14 +1,14 @@
 import { DARKGREY, GREY } from "./palette";
 
-export const nodeWidth = 140;
-export const nodeHeight = 180;
-export const nodeBackgroundColor = "white";
-export const nodeStrokeColor = GREY
-export const nodeTextColor = DARKGREY;
+export const NODE_WIDTH = 140;
+export const NODE_HEIGHT = 180;
+export const NODE_BG_COLOR = "white";
+export const NODE_STROKE_COLOR = GREY
+export const NODE_TEXT_COLOR = DARKGREY;
 
-export const organizationPadding = 20;
+export const ORG_PADDING = 20;
 
-export const vertexStrokeColor = GREY;
+export const VERTEX_STROKE_COLOR = GREY;
 
-export const treeLevelSpacing = 30;
-export const treeSiblingSpacing = 25;
+export const TREE_LEVEL_SPACING = 30;
+export const TREE_SIBLING_SPACING = 25;

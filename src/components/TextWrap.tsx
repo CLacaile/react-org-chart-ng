@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { wrapText } from "../utils/svgUtils";
-import * as CONSTANTS from "../utils/constants";
+import { NODE_TEXT_COLOR } from "../utils/constants";
 
 interface TextWrapProps {
   text: string;
@@ -14,7 +14,7 @@ interface TextWrapProps {
 
 function TextWrap({
   text,
-  color = CONSTANTS.nodeTextColor,
+  color = NODE_TEXT_COLOR,
   font,
   size = "normal",
   weight = "normal",

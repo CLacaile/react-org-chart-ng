@@ -1,9 +1,9 @@
-import * as CONSTANTS from "../utils/constants";
 import { motion } from "framer-motion";
 import SoftShadow from "./filters/SoftShadow";
 import { NodeData } from "../types/node";
 import TextWrap from "./TextWrap";
 import Avatar from "./Avatar";
+import { NODE_BG_COLOR, NODE_HEIGHT, NODE_STROKE_COLOR, NODE_TEXT_COLOR, NODE_WIDTH } from "../utils/constants";
 
 interface NodeProps {
   data: NodeData
@@ -13,8 +13,8 @@ interface NodeProps {
 }
 
 function Node({ data, x, y, onClick }: NodeProps) {
-  const rectWidth = CONSTANTS.nodeWidth;
-  const rectHeight = CONSTANTS.nodeHeight;
+  const rectWidth = NODE_WIDTH;
+  const rectHeight = NODE_HEIGHT;
 
   return (
     <>
@@ -37,8 +37,8 @@ function Node({ data, x, y, onClick }: NodeProps) {
           className="node-container"
           width={rectWidth}
           height={rectHeight}
-          stroke={CONSTANTS.nodeStrokeColor}
-          fill={CONSTANTS.nodeBackgroundColor}
+          stroke={NODE_STROKE_COLOR}
+          fill={NODE_BG_COLOR}
           fillOpacity={0.5}
           rx="5"
         />
@@ -47,21 +47,21 @@ function Node({ data, x, y, onClick }: NodeProps) {
         {/* Nom/prénom */}
         <TextWrap
           text={`${data.firstname} ${data.lastname}`}
-          color={CONSTANTS.nodeTextColor}
+          color={NODE_TEXT_COLOR}
           font="Gabarito"
           size="small"
           weight="bold"
-          maxWidth={CONSTANTS.nodeWidth - 125}
-          position={{ x: rectWidth / 2, y: CONSTANTS.nodeHeight / 4 }}
+          maxWidth={NODE_WIDTH - 125}
+          position={{ x: rectWidth / 2, y: NODE_HEIGHT / 4 }}
         />
         {/* Poste */}
         <TextWrap
           text="Poste"
-          color={CONSTANTS.nodeTextColor}
+          color={NODE_TEXT_COLOR}
           font="Gabarito"
           size="small"
-          maxWidth={CONSTANTS.nodeWidth - 125}
-          position={{ x: rectWidth / 2, y: CONSTANTS.nodeHeight / 4 + 20 }}
+          maxWidth={NODE_WIDTH - 125}
+          position={{ x: rectWidth / 2, y: NODE_HEIGHT / 4 + 20 }}
         />
         
       </motion.g>

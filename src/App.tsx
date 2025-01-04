@@ -1,5 +1,6 @@
 import "./App.css";
 import Controls from "./components/Controls";
+import SoftShadow from "./components/filters/SoftShadow";
 import OrgChart from "./components/OrgChart";
 
 const data = {
@@ -70,6 +71,7 @@ const data = {
 };
 
 function App() {
+  console.log("Rendering App");
   return (
     <svg
       className="app-root-svg"
@@ -77,11 +79,14 @@ function App() {
       height="100%"
       style={{ overflow: "hidden" }}
     >
-      <defs>
+      <defs id="fonts">
         <style>
           @import
           url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
         </style>
+      </defs>
+      <defs id="filters">
+        <SoftShadow />
       </defs>
       <Controls>
         <OrgChart data={data} />

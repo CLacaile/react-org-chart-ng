@@ -1,8 +1,8 @@
 import "./App.css";
 import Controls from "./components/Controls";
-import SoftShadow from "./components/filters/SoftShadow";
 import DepartmentTree from "./components/DepartmentTree";
 import { DepartmentData } from "./types/department";
+import RootSvg from "./components/RootSvg";
 
 const deptAData: DepartmentData = {
   id: 1,
@@ -78,25 +78,11 @@ const deptAData: DepartmentData = {
 function App() {
   console.log("Rendering App");
   return (
-    <svg
-      className="app-root-svg"
-      width="100%"
-      height="100%"
-      style={{ overflow: "hidden" }}
-    >
-      <defs id="fonts">
-        <style>
-          @import
-          url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
-        </style>
-      </defs>
-      <defs id="filters">
-        <SoftShadow />
-      </defs>
+    <RootSvg>
       <Controls>
         <DepartmentTree data={deptAData} />
       </Controls>
-    </svg>
+    </RootSvg>
   );
 }
 

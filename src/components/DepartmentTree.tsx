@@ -1,4 +1,4 @@
-import Tree from "./Tree";
+import PersonTree from "./PersonTree";
 import { usePersonExpansionMap } from "../hooks/usePersonExpansionMap";
 import Department from "./Department";
 import { useTreeDimensions } from "../hooks/useTreeDimensions";
@@ -63,11 +63,11 @@ function DepartmentTree({ data, x = 0, y = 0, scale = 1 }: DepartmentTree) {
             id={`tree-expansion-group-${data.id}`}
             key={`tree-expansion-group-${data.id}`}
           >
-            <Tree
+            <PersonTree
               rootNodeX={x}
               rootNodeY={y}
               rootNode={data.tree}
-              nodesExpansionMap={personExpansionMap}
+              expansionMap={personExpansionMap}
               toggleNodeExpansion={togglePersonExpansion}
             />
           </motion.g>

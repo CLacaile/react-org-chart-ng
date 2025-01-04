@@ -6,40 +6,40 @@ import { usePersonTreeWidth } from "../hooks/usePersonSubtreeWidth";
 import { AnimatePresence, motion } from "framer-motion";
 import { PERSON_HEIGHT } from "../utils/constants";
 
-interface TreeProps {
+interface PersonTreeProps {
   rootNode: PersonData;
   rootNodeX: number;
   rootNodeY: number;
   finalX?: number;
   finalY?: number;
-  nodesExpansionMap: Map<number, boolean>;
+  expansionMap: Map<number, boolean>;
   toggleNodeExpansion: (nodeId: number) => void;
 }
 
-function Tree({
+function PersonTree({
   rootNode,
   rootNodeX,
   rootNodeY,
   finalX = rootNodeX,
   finalY = rootNodeY,
-  nodesExpansionMap,
+  expansionMap,
   toggleNodeExpansion,
-}: TreeProps) {
-  console.log("Rendering Tree", rootNode);
-  const isExpanded = nodesExpansionMap.get(rootNode.id);
-  const subtreeWidth = usePersonTreeWidth(rootNode, nodesExpansionMap);
+}: PersonTreeProps) {
+  console.log("Rendering Person Tree", rootNode);
+  const isExpanded = expansionMap.get(rootNode.id);
+  const subtreeWidth = usePersonTreeWidth(rootNode, expansionMap);
   const childPositions = useChildPositions(
     rootNode,
     rootNodeX,
     rootNodeY,
     subtreeWidth,
-    nodesExpansionMap
+    expansionMap
   );
 
   return (
     <AnimatePresence>
       <motion.g 
-        id={`tree-${rootNode.id}`}
+        id={`person-tree-${rootNode.id}`}
         initial={{ x: rootNodeX, y: rootNodeY, opacity: 0 }} // Position initiale et invisible
         animate={{ x: finalX, y: finalY, opacity: 1 }} // Position finale et visible
         exit={{ x: rootNodeX, y: rootNodeY, opacity: 0 }} // Retourne à la position initiale et disparaît
@@ -65,13 +65,13 @@ function Tree({
                 destX={childX}
                 destY={childY}
               />
-              <Tree
+              <PersonTree
                 rootNode={child}
                 rootNodeX={0}
                 rootNodeY={0}
                 finalX={rootNodeX + childX}
                 finalY={rootNodeY + childY}
-                nodesExpansionMap={nodesExpansionMap}
+                expansionMap={expansionMap}
                 toggleNodeExpansion={toggleNodeExpansion}
               />
             </motion.g>
@@ -82,4 +82,4 @@ function Tree({
   );
 }
 
-export default Tree;
+export default PersonTree;

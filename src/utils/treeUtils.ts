@@ -1,4 +1,4 @@
-import { NodeData } from '../types/node';
+import { PersonData } from '../types/person';
 
 /**
  * getSubtreeWidth calcule la largeur du sous-arbre pour un nœud donné.
@@ -8,7 +8,7 @@ import { NodeData } from '../types/node';
  * @param siblingSpacing l'espace horizontal entre les frères et sœurs
  * @returns la largeur du sous-arbre pour le nœud donné
  */
-export function getSubtreeWidth(root: NodeData, nodeWidth: number, nodesExpansionMap: Map<number, boolean>, siblingSpacing: number): number {
+export function getSubtreeWidth(root: PersonData, nodeWidth: number, nodesExpansionMap: Map<number, boolean>, siblingSpacing: number): number {
   const isLeaf = root.children.length === 0;
   const isExpanded = nodesExpansionMap.get(root.id) || false;
 
@@ -25,17 +25,17 @@ export function getSubtreeWidth(root: NodeData, nodeWidth: number, nodesExpansio
   return childrenWidth + spacing;
 }
 
-export function getTreeDimensions(root: NodeData, nodeWidth: number, nodeHeight: number, nodesExpansionMap: Map<number, boolean>, levelSpacing: number, siblingSpacing: number) {
-  const treeWidth = getSubtreeWidth(root, nodeWidth, nodesExpansionMap, siblingSpacing); // Largeur totale
-  const treeHeight = getTreeDepth(root, nodesExpansionMap) * (nodeHeight + levelSpacing); // Hauteur totale
+export function getTreeDimensions(root: PersonData, nodeWidth: number, nodeHeight: number, ExpansionMap: Map<number, boolean>, levelSpacing: number, siblingSpacing: number) {
+  const treeWidth = getSubtreeWidth(root, nodeWidth, ExpansionMap, siblingSpacing); // Largeur totale
+  const treeHeight = getTreeDepth(root, ExpansionMap) * (nodeHeight + levelSpacing); // Hauteur totale
   return { treeWidth, treeHeight };
 }
 
-export function getTreeDepth(root: NodeData, nodesExpansionMap: Map<number, boolean>): number {
+export function getTreeDepth(root: PersonData, expansionMap: Map<number, boolean>): number {
   const isLeaf = root.children.length === 0;
-  const isExpanded = nodesExpansionMap.get(root.id) || false;
+  const isExpanded = expansionMap.get(root.id) || false;
 
   if (isLeaf || !isExpanded) return 1;
 
-  return 1 + Math.max(...root.children.map((child) => getTreeDepth(child, nodesExpansionMap)));
+  return 1 + Math.max(...root.children.map((child) => getTreeDepth(child, expansionMap)));
 }

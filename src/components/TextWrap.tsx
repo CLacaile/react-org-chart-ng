@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { wrapText } from "../utils/svgUtils";
-import { NODE_TEXT_COLOR } from "../utils/constants";
+import { PERSON_TEXT_COLOR } from "../utils/constants";
 
 interface TextWrapProps {
   text: string;
@@ -14,7 +14,7 @@ interface TextWrapProps {
 
 function TextWrap({
   text,
-  color = NODE_TEXT_COLOR,
+  color = PERSON_TEXT_COLOR,
   font = "Gabarito",
   size = "normal",
   weight = "normal",

@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo } from "react";
 import { getTreeDimensions } from "../utils/treeUtils";
-import { NodeData } from "../types/node";
-import { NODE_WIDTH, NODE_HEIGHT, TREE_LEVEL_SPACING, TREE_SIBLING_SPACING } from "../utils/constants";
+import { PersonData } from "../types/person";
+import { PERSON_WIDTH, PERSON_HEIGHT, TREE_LEVEL_SPACING, TREE_SIBLING_SPACING } from "../utils/constants";
 
 interface UseAutoZoomParams {
-  data: NodeData; // Structure de l'arbre
+  data: PersonData; // Structure de l'arbre
   expansionMap: Map<number, boolean>;
 }
 
@@ -44,7 +44,7 @@ export function useAutoZoom({ data, expansionMap }: UseAutoZoomParams) {
 
   // Calcul dynamique des dimensions de l'arbre
   const { treeWidth, treeHeight } = useMemo(() => {
-    return getTreeDimensions(data, NODE_WIDTH, NODE_HEIGHT, expansionMap, TREE_LEVEL_SPACING, TREE_SIBLING_SPACING);
+    return getTreeDimensions(data, PERSON_WIDTH, PERSON_HEIGHT, expansionMap, TREE_LEVEL_SPACING, TREE_SIBLING_SPACING);
   }, [data, expansionMap]);
 
   // Calcul de l'échelle pour ajuster l'arbre à l'écran

@@ -1,13 +1,13 @@
 import { useMemo } from "react";
-import { NodeData } from "../types/node";
+import { PersonData } from "../types/person";
 import { getTreeDimensions } from "../utils/treeUtils";
-import { NODE_WIDTH, NODE_HEIGHT, TREE_LEVEL_SPACING, TREE_SIBLING_SPACING } from "../utils/constants";
+import { PERSON_WIDTH, PERSON_HEIGHT, TREE_LEVEL_SPACING, TREE_SIBLING_SPACING } from "../utils/constants";
 
 export const useTreeDimensions = (
-  node: NodeData,
-  nodesExpansionMap: Map<number, boolean>
+  person: PersonData,
+  PersonExpansionMap: Map<number, boolean>
 ) => {
   return useMemo(() => {
-    return getTreeDimensions(node, NODE_WIDTH, NODE_HEIGHT, nodesExpansionMap, TREE_LEVEL_SPACING, TREE_SIBLING_SPACING);
-  }, [node, nodesExpansionMap]);
+    return getTreeDimensions(person, PERSON_WIDTH, PERSON_HEIGHT, PersonExpansionMap, TREE_LEVEL_SPACING, TREE_SIBLING_SPACING);
+  }, [person, PersonExpansionMap]);
 };

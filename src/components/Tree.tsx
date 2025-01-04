@@ -1,13 +1,13 @@
-import Node from "./Node";
-import { NodeData } from "../types/node";
+import Person from "./Person";
+import { PersonData } from "../types/person";
 import { useChildPositions } from "../hooks/useChildPositions";
 import Vertex from "./Vertex";
-import { useSubtreeWidth } from "../hooks/useSubtreeWidth";
+import { usePersonTreeWidth } from "../hooks/usePersonSubtreeWidth";
 import { AnimatePresence, motion } from "framer-motion";
-import { NODE_HEIGHT } from "../utils/constants";
+import { PERSON_HEIGHT } from "../utils/constants";
 
 interface TreeProps {
-  rootNode: NodeData;
+  rootNode: PersonData;
   rootNodeX: number;
   rootNodeY: number;
   finalX?: number;
@@ -27,7 +27,7 @@ function Tree({
 }: TreeProps) {
   console.log("Rendering Tree", rootNode);
   const isExpanded = nodesExpansionMap.get(rootNode.id);
-  const subtreeWidth = useSubtreeWidth(rootNode, nodesExpansionMap);
+  const subtreeWidth = usePersonTreeWidth(rootNode, nodesExpansionMap);
   const childPositions = useChildPositions(
     rootNode,
     rootNodeX,
@@ -46,7 +46,7 @@ function Tree({
         transition={{ type: "spring", stiffness: 200, damping: 18 }}
       >
         {/* Dessiner le nœud parent */}
-        <Node
+        <Person
           data={rootNode}
           x={rootNodeX}
           y={rootNodeY}
@@ -60,7 +60,7 @@ function Tree({
               <Vertex
                 originId={rootNode.id}
                 originX={rootNodeX}
-                originY={rootNodeY + NODE_HEIGHT}
+                originY={rootNodeY + PERSON_HEIGHT}
                 destId={child.id}
                 destX={childX}
                 destY={childY}

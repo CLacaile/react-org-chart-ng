@@ -1,4 +1,4 @@
-import { NodeData } from "../types/node";
+import { PersonData } from "../types/person";
 
 /**
  * Initialise l'état d'expansion des nœuds.
@@ -6,10 +6,10 @@ import { NodeData } from "../types/node";
  * @param expanded Par défaut, tous les nœuds seront dépliés si `true`.
  * @returns Une Map contenant l'état d'expansion initial de chaque nœud.
  */
-export function initializeExpansionMap(rootNode: NodeData, expanded = true): Map<number, boolean> {
+export function initializeExpansionMap(rootNode: PersonData, expanded = true): Map<number, boolean> {
   const expansionMap = new Map<number, boolean>();
 
-  const traverse = (node: NodeData) => {
+  const traverse = (node: PersonData) => {
     expansionMap.set(node.id, expanded);
     node.children.forEach(traverse);
   };

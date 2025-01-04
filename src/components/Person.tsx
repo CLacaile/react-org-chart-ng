@@ -1,30 +1,30 @@
 import { motion } from "framer-motion";
-import { NodeData } from "../types/node";
+import { PersonData } from "../types/person";
 import TextWrap from "./TextWrap";
 import Avatar from "./Avatar";
 import {
-  NODE_BG_COLOR,
-  NODE_HEIGHT,
-  NODE_STROKE_COLOR,
-  NODE_TEXT_COLOR,
-  NODE_WIDTH,
+  PERSON_BG_COLOR,
+  PERSON_HEIGHT,
+  PERSON_STROKE_COLOR,
+  PERSON_TEXT_COLOR,
+  PERSON_WIDTH,
 } from "../utils/constants";
 
-interface NodeProps {
-  data: NodeData;
+interface PersonProps {
+  data: PersonData;
   x: number;
   y: number;
   onClick?: () => void;
 }
 
-function Node({ data, x, y, onClick }: NodeProps) {
-  const rectWidth = NODE_WIDTH;
-  const rectHeight = NODE_HEIGHT;
+function Person({ data, x, y, onClick }: PersonProps) {
+  const rectWidth = PERSON_WIDTH;
+  const rectHeight = PERSON_HEIGHT;
 
   return (
     <motion.g
-      id={`node-${data.id}`}
-      data-testid={`node-${data.id}`}
+      id={`person-${data.id}`}
+      data-testid={`person-${data.id}`}
       initial={{ x: x - rectWidth / 2, y, filter: "none" }}
       transition={{ type: "spring", stiffness: 200, damping: 18 }}
       style={{ cursor: "pointer" }}
@@ -37,11 +37,11 @@ function Node({ data, x, y, onClick }: NodeProps) {
     >
       {/* Conteneur du nœud */}
       <rect
-        className="node-container"
+        className="person-container"
         width={rectWidth}
         height={rectHeight}
-        stroke={NODE_STROKE_COLOR}
-        fill={NODE_BG_COLOR}
+        stroke={PERSON_STROKE_COLOR}
+        fill={PERSON_BG_COLOR}
         fillOpacity={0.5}
         rx="5"
       />
@@ -50,24 +50,24 @@ function Node({ data, x, y, onClick }: NodeProps) {
       {/* Nom/prénom */}
       <TextWrap
         text={`${data.firstname} ${data.lastname}`}
-        color={NODE_TEXT_COLOR}
+        color={PERSON_TEXT_COLOR}
         font="Gabarito"
         size="small"
         weight="bold"
-        maxWidth={NODE_WIDTH - 125}
-        position={{ x: rectWidth / 2, y: NODE_HEIGHT / 4 }}
+        maxWidth={PERSON_WIDTH - 125}
+        position={{ x: rectWidth / 2, y: PERSON_HEIGHT / 4 }}
       />
       {/* Poste */}
       <TextWrap
         text="Poste"
-        color={NODE_TEXT_COLOR}
+        color={PERSON_TEXT_COLOR}
         font="Gabarito"
         size="small"
-        maxWidth={NODE_WIDTH - 125}
-        position={{ x: rectWidth / 2, y: NODE_HEIGHT / 4 + 20 }}
+        maxWidth={PERSON_WIDTH - 125}
+        position={{ x: rectWidth / 2, y: PERSON_HEIGHT / 4 + 20 }}
       />
     </motion.g>
   );
 }
 
-export default Node;
+export default Person;

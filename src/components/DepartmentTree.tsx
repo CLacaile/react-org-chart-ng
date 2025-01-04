@@ -41,7 +41,8 @@ function DepartmentTree({ data, x = 0, y = 0, scale = 1 }: DepartmentTree) {
 
   return (
     <motion.g
-      data-testid="dept-tree"
+      id={`dept-tree-${data.id}`}
+      data-testid={`dept-tree-${data.id}`}
       className="dept-tree"
       initial={{ x: x + window.innerWidth / 2, y: y, scale: 0 }}
       animate={{ x: x + window.innerWidth / 2, y: y, scale }}

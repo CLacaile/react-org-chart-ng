@@ -1,6 +1,5 @@
 import "./App.css";
 import Controls from "./components/Controls";
-import Organization from "./components/Organization";
 import OrgChart from "./components/OrgChart";
 
 const data = {
@@ -85,11 +84,7 @@ function App() {
         </style>
       </defs>
       <Controls>
-        <g>
-          <Organization />
-          <OrgChart data={data} />
-        </g>
-        
+        <OrgChart data={data} />
       </Controls>
     </svg>
   );

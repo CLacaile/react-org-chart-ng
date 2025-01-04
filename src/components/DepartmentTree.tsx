@@ -1,5 +1,4 @@
 import Tree from "./Tree";
-import { NodeData } from "../types/node";
 import { useExpansionMap } from "../hooks/useExpansionMap";
 import Department from "./Department";
 import { useTreeDimensions } from "../hooks/useTreeDimensions";
@@ -7,17 +6,18 @@ import { DEPT_MIN_HEIGHT, DEPT_MIN_WIDTH, DEPT_PADDING } from "../utils/constant
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { initializeExpansionMap } from "../utils/nodeUtils";
+import { DepartmentData } from "../types/department";
 
-interface OrgChartProps {
-  data: NodeData;
+interface DepartmentTree {
+  data: DepartmentData;
   x?: number;
   y?: number;
   scale?: number;
 }
 
-function OrgChart({ data, x = 0, y = 0, scale = 1 }: OrgChartProps) {
-  const { expansionMap: nodesExpansionMap, toggleNodeExpansion } = useExpansionMap(initializeExpansionMap(data));
-  const { treeWidth, treeHeight } = useTreeDimensions(data, nodesExpansionMap);
+function DepartmentTree({ data, x = 0, y = 0, scale = 1 }: DepartmentTree) {
+  const { expansionMap: nodesExpansionMap, toggleNodeExpansion } = useExpansionMap(initializeExpansionMap(data.tree));
+  const { treeWidth, treeHeight } = useTreeDimensions(data.tree, nodesExpansionMap);
   const [showTree, setShowTree] = useState(false);
   const [orgDimensions, setOrgDimensions] = useState({
     width: DEPT_MIN_WIDTH,
@@ -41,13 +41,13 @@ function OrgChart({ data, x = 0, y = 0, scale = 1 }: OrgChartProps) {
 
   return (
     <motion.g
-      data-testid="org-chart"
-      className="org-chart"
+      data-testid="dept-tree"
+      className="dept-tree"
       initial={{ x: x + window.innerWidth / 2, y: y, scale: 0 }}
       animate={{ x: x + window.innerWidth / 2, y: y, scale }}
     >
       <Department
-        text={"Organisation A"}
+        text={data.text}
         x={x - orgDimensions.width / 2}
         y={y - DEPT_PADDING}
         width={orgDimensions.width}
@@ -55,7 +55,7 @@ function OrgChart({ data, x = 0, y = 0, scale = 1 }: OrgChartProps) {
         onClick={handleOrgClick}
       />
 
-      {/* Apparition de l'arbre au clic sur l'organisation */}
+      {/* Apparition de l'arbre au clic sur le département */}
       <AnimatePresence>
         {showTree && (
           <motion.g
@@ -65,7 +65,7 @@ function OrgChart({ data, x = 0, y = 0, scale = 1 }: OrgChartProps) {
             <Tree
               rootNodeX={x}
               rootNodeY={y}
-              rootNode={data}
+              rootNode={data.tree}
               nodesExpansionMap={nodesExpansionMap}
               toggleNodeExpansion={toggleNodeExpansion}
             />
@@ -76,4 +76,4 @@ function OrgChart({ data, x = 0, y = 0, scale = 1 }: OrgChartProps) {
   );
 }
 
-export default OrgChart;
+export default DepartmentTree;

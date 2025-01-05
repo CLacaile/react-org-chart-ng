@@ -1,5 +1,5 @@
 import Team from "./Team";
-import { usePersonExpansionMap } from "../hooks/usePersonExpansionMap";
+import { useTeamMembersExpansionMap } from "../hooks/useTeamMembersExpansionMap";
 import DepartmentContainer from "./DepartmentContainer";
 import { useTeamDimensions } from "../hooks/useTeamDimensions";
 import { DEPT_MIN_HEIGHT, DEPT_MIN_WIDTH, DEPT_PADDING } from "../utils/constants";
@@ -16,8 +16,8 @@ interface DepartmentProps {
 }
 
 function Department({ data, x = 0, y = 0, scale = 1 }: DepartmentProps) {
-  const { personExpansionMap, togglePersonExpansion } = usePersonExpansionMap(initializeExpansionMap(data.teamRootNode));
-  const { treeWidth, treeHeight } = useTeamDimensions(data.teamRootNode, personExpansionMap);
+  const { teamMembersExpansionMap, toggleTeamMemberExpansion } = useTeamMembersExpansionMap(initializeExpansionMap(data.teamRootNode));
+  const { treeWidth, treeHeight } = useTeamDimensions(data.teamRootNode, teamMembersExpansionMap);
   const [showTree, setShowTree] = useState(false);
   const [orgDimensions, setOrgDimensions] = useState({
     width: DEPT_MIN_WIDTH,
@@ -67,8 +67,8 @@ function Department({ data, x = 0, y = 0, scale = 1 }: DepartmentProps) {
               rootNodeX={x}
               rootNodeY={y}
               rootNode={data.teamRootNode}
-              expansionMap={personExpansionMap}
-              toggleNodeExpansion={togglePersonExpansion}
+              expansionMap={teamMembersExpansionMap}
+              toggleNodeExpansion={toggleTeamMemberExpansion}
             />
           </motion.g>
         )}

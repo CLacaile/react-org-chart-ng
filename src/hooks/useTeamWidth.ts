@@ -3,7 +3,7 @@ import { PersonData } from "../types/person";
 import { getSubtreeWidth } from "../utils/treeUtils";
 import { PERSON_WIDTH, TREE_SIBLING_SPACING } from "../utils/constants";
 
-export const usePersonTreeWidth = (
+export const useTeamWidth = (
   person: PersonData,
   personExpansionMap: Map<number, boolean>
 ) => {

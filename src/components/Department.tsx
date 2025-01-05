@@ -17,7 +17,7 @@ interface DepartmentProps {
 
 function Department({ data, x = 0, y = 0, scale = 1 }: DepartmentProps) {
   const { teamMembersExpansionMap, toggleTeamMemberExpansion } = useTeamMembersExpansionMap(initTeamMembersExpansionMap(data.teamRootNode));
-  const { treeWidth: teamWidth, treeHeight: teamHeight } = useTeamDimensions(data.teamRootNode, teamMembersExpansionMap);
+  const { teamWidth: teamWidth, teamHeight: teamHeight } = useTeamDimensions(data.teamRootNode, teamMembersExpansionMap);
   const [ showTeam, setShowTeam ] = useState(false);
   const [ deptDimensions, setDeptDimensions ] = useState({
     width: DEPT_MIN_WIDTH,

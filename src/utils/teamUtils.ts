@@ -26,9 +26,9 @@ export function getTeamWidth(root: PersonData, nodeWidth: number, nodesExpansion
 }
 
 export function getTeamDimensions(root: PersonData, nodeWidth: number, nodeHeight: number, ExpansionMap: Map<number, boolean>, levelSpacing: number, siblingSpacing: number) {
-  const treeWidth = getTeamWidth(root, nodeWidth, ExpansionMap, siblingSpacing); // Largeur totale
-  const treeHeight = getTeamDepth(root, ExpansionMap) * (nodeHeight + levelSpacing); // Hauteur totale
-  return { treeWidth, treeHeight };
+  const teamWidth = getTeamWidth(root, nodeWidth, ExpansionMap, siblingSpacing); // Largeur totale
+  const teamHeight = getTeamDepth(root, ExpansionMap) * (nodeHeight + levelSpacing); // Hauteur totale
+  return { teamWidth, teamHeight };
 }
 
 export function getTeamDepth(root: PersonData, expansionMap: Map<number, boolean>): number {

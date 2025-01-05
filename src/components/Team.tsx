@@ -1,6 +1,6 @@
 import Person from "./Person";
 import { PersonData } from "../types/person";
-import { useChildPositions } from "../hooks/useChildPositions";
+import { useTeamMembersPositions } from "../hooks/useTeamMembersPositions";
 import Vertex from "./Vertex";
 import { useTeamWidth } from "../hooks/useTeamWidth";
 import { AnimatePresence, motion } from "framer-motion";
@@ -28,7 +28,7 @@ function Team({
   console.log("Rendering Team", rootNode);
   const isExpanded = expansionMap.get(rootNode.id);
   const subtreeWidth = useTeamWidth(rootNode, expansionMap);
-  const childPositions = useChildPositions(
+  const childPositions = useTeamMembersPositions(
     rootNode,
     rootNodeX,
     rootNodeY,

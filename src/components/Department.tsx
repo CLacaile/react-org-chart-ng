@@ -1,7 +1,7 @@
 import Team from "./Team";
 import { usePersonExpansionMap } from "../hooks/usePersonExpansionMap";
 import DepartmentContainer from "./DepartmentContainer";
-import { useTreeDimensions } from "../hooks/useTreeDimensions";
+import { useTeamDimensions } from "../hooks/useTeamDimensions";
 import { DEPT_MIN_HEIGHT, DEPT_MIN_WIDTH, DEPT_PADDING } from "../utils/constants";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -17,7 +17,7 @@ interface DepartmentProps {
 
 function Department({ data, x = 0, y = 0, scale = 1 }: DepartmentProps) {
   const { personExpansionMap, togglePersonExpansion } = usePersonExpansionMap(initializeExpansionMap(data.teamRootNode));
-  const { treeWidth, treeHeight } = useTreeDimensions(data.teamRootNode, personExpansionMap);
+  const { treeWidth, treeHeight } = useTeamDimensions(data.teamRootNode, personExpansionMap);
   const [showTree, setShowTree] = useState(false);
   const [orgDimensions, setOrgDimensions] = useState({
     width: DEPT_MIN_WIDTH,

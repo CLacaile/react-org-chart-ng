@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { TREE_LEVEL_SPACING, VERTEX_STROKE_COLOR } from '../utils/constants';
+import { TEAM_LEVEL_SPACING, VERTEX_STROKE_COLOR } from '../utils/constants';
 
 interface VertexProps {
     originId: number,
@@ -12,7 +12,7 @@ interface VertexProps {
 
 function Vertex({ originId, originX, originY, destId, destX, destY }: VertexProps) {
     const midX = destX;
-    const midY = destY  - TREE_LEVEL_SPACING/2;
+    const midY = destY  - TEAM_LEVEL_SPACING/2;
     return (
         <motion.path
             id={`vertex-${originId}-${destId}`}

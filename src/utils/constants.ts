@@ -12,5 +12,5 @@ export const DEPT_PADDING = 60;
 
 export const VERTEX_STROKE_COLOR = GREY;
 
-export const TREE_LEVEL_SPACING = 30;
-export const TREE_SIBLING_SPACING = 25;
+export const TEAM_LEVEL_SPACING = 30;
+export const TEAM_SIBLING_SPACING = 25;

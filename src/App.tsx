@@ -1,12 +1,12 @@
 import "./App.css";
 import Controls from "./components/Controls";
-import DepartmentTree from "./components/DepartmentTree";
+import Department from "./components/Department";
 import { DepartmentData } from "./types/department";
 import RootSvg from "./components/RootSvg";
 
 const deptAData: DepartmentData = {
   id: 1,
-  text: "Départment A",
+  text: "Département A",
   tree: {
     id: 1,
     text: "Jean-Patrick MARTIN",
@@ -80,7 +80,7 @@ function App() {
   return (
     <RootSvg>
       <Controls>
-        <DepartmentTree data={deptAData} />
+        <Department data={deptAData} />
       </Controls>
     </RootSvg>
   );

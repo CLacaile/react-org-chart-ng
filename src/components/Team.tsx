@@ -6,7 +6,7 @@ import { usePersonTreeWidth } from "../hooks/usePersonSubtreeWidth";
 import { AnimatePresence, motion } from "framer-motion";
 import { PERSON_HEIGHT } from "../utils/constants";
 
-interface PersonTreeProps {
+interface TeamProps {
   rootNode: PersonData;
   rootNodeX: number;
   rootNodeY: number;
@@ -16,7 +16,7 @@ interface PersonTreeProps {
   toggleNodeExpansion: (nodeId: number) => void;
 }
 
-function PersonTree({
+function Team({
   rootNode,
   rootNodeX,
   rootNodeY,
@@ -24,8 +24,8 @@ function PersonTree({
   finalY = rootNodeY,
   expansionMap,
   toggleNodeExpansion,
-}: PersonTreeProps) {
-  console.log("Rendering Person Tree", rootNode);
+}: TeamProps) {
+  console.log("Rendering Team", rootNode);
   const isExpanded = expansionMap.get(rootNode.id);
   const subtreeWidth = usePersonTreeWidth(rootNode, expansionMap);
   const childPositions = useChildPositions(
@@ -39,7 +39,7 @@ function PersonTree({
   return (
     <AnimatePresence>
       <motion.g 
-        id={`person-tree-${rootNode.id}`}
+        id={`team-${rootNode.id}`}
         initial={{ x: rootNodeX, y: rootNodeY, opacity: 0 }} // Position initiale et invisible
         animate={{ x: finalX, y: finalY, opacity: 1 }} // Position finale et visible
         exit={{ x: rootNodeX, y: rootNodeY, opacity: 0 }} // Retourne à la position initiale et disparaît
@@ -56,7 +56,7 @@ function PersonTree({
         {/* Dessiner les liens et les sous-arbres */}
         {isExpanded &&
           childPositions.map(({ child, x: childX, y: childY }, index) => (
-            <motion.g id={`subtree-${rootNode.id}-${index}`} key={`subtree-${rootNode.id}-${index}`}>
+            <motion.g id={`subteam-${rootNode.id}-${index}`} key={`subteam-${rootNode.id}-${index}`}>
               <Vertex
                 originId={rootNode.id}
                 originX={rootNodeX}
@@ -65,7 +65,7 @@ function PersonTree({
                 destX={childX}
                 destY={childY}
               />
-              <PersonTree
+              <Team
                 rootNode={child}
                 rootNodeX={0}
                 rootNodeY={0}
@@ -82,4 +82,4 @@ function PersonTree({
   );
 }
 
-export default PersonTree;
+export default Team;

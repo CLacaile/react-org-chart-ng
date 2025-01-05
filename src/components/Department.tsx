@@ -16,8 +16,8 @@ interface DepartmentProps {
 }
 
 function Department({ data, x = 0, y = 0, scale = 1 }: DepartmentProps) {
-  const { personExpansionMap, togglePersonExpansion } = usePersonExpansionMap(initializeExpansionMap(data.tree));
-  const { treeWidth, treeHeight } = useTreeDimensions(data.tree, personExpansionMap);
+  const { personExpansionMap, togglePersonExpansion } = usePersonExpansionMap(initializeExpansionMap(data.teamRootNode));
+  const { treeWidth, treeHeight } = useTreeDimensions(data.teamRootNode, personExpansionMap);
   const [showTree, setShowTree] = useState(false);
   const [orgDimensions, setOrgDimensions] = useState({
     width: DEPT_MIN_WIDTH,
@@ -66,7 +66,7 @@ function Department({ data, x = 0, y = 0, scale = 1 }: DepartmentProps) {
             <Team
               rootNodeX={x}
               rootNodeY={y}
-              rootNode={data.tree}
+              rootNode={data.teamRootNode}
               expansionMap={personExpansionMap}
               toggleNodeExpansion={togglePersonExpansion}
             />

@@ -8,7 +8,7 @@ import { PersonData } from '../types/person';
  * @param siblingSpacing l'espace horizontal entre les frères et sœurs
  * @returns la largeur du sous-arbre pour le nœud donné
  */
-export function getSubtreeWidth(root: PersonData, nodeWidth: number, nodesExpansionMap: Map<number, boolean>, siblingSpacing: number): number {
+export function getTeamWidth(root: PersonData, nodeWidth: number, nodesExpansionMap: Map<number, boolean>, siblingSpacing: number): number {
   const isLeaf = root.children.length === 0;
   const isExpanded = nodesExpansionMap.get(root.id) || false;
 
@@ -17,7 +17,7 @@ export function getSubtreeWidth(root: PersonData, nodeWidth: number, nodesExpans
   }
 
   const childrenWidth = root.children.reduce(
-    (acc, child) => acc + getSubtreeWidth(child, nodeWidth, nodesExpansionMap, siblingSpacing),
+    (acc, child) => acc + getTeamWidth(child, nodeWidth, nodesExpansionMap, siblingSpacing),
     0
   );
   const spacing = (root.children.length - 1) * siblingSpacing;
@@ -25,17 +25,17 @@ export function getSubtreeWidth(root: PersonData, nodeWidth: number, nodesExpans
   return childrenWidth + spacing;
 }
 
-export function getTreeDimensions(root: PersonData, nodeWidth: number, nodeHeight: number, ExpansionMap: Map<number, boolean>, levelSpacing: number, siblingSpacing: number) {
-  const treeWidth = getSubtreeWidth(root, nodeWidth, ExpansionMap, siblingSpacing); // Largeur totale
-  const treeHeight = getTreeDepth(root, ExpansionMap) * (nodeHeight + levelSpacing); // Hauteur totale
+export function getTeamDimensions(root: PersonData, nodeWidth: number, nodeHeight: number, ExpansionMap: Map<number, boolean>, levelSpacing: number, siblingSpacing: number) {
+  const treeWidth = getTeamWidth(root, nodeWidth, ExpansionMap, siblingSpacing); // Largeur totale
+  const treeHeight = getTeamDepth(root, ExpansionMap) * (nodeHeight + levelSpacing); // Hauteur totale
   return { treeWidth, treeHeight };
 }
 
-export function getTreeDepth(root: PersonData, expansionMap: Map<number, boolean>): number {
+export function getTeamDepth(root: PersonData, expansionMap: Map<number, boolean>): number {
   const isLeaf = root.children.length === 0;
   const isExpanded = expansionMap.get(root.id) || false;
 
   if (isLeaf || !isExpanded) return 1;
 
-  return 1 + Math.max(...root.children.map((child) => getTreeDepth(child, expansionMap)));
+  return 1 + Math.max(...root.children.map((child) => getTeamDepth(child, expansionMap)));
 }

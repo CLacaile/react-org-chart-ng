@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { PersonData } from "../types/person";
-import { getSubtreeWidth } from "../utils/treeUtils";
+import { getTeamWidth } from "../utils/teamUtils";
 import { PERSON_WIDTH, TEAM_SIBLING_SPACING, PERSON_HEIGHT, TEAM_LEVEL_SPACING } from "../utils/constants";
 
 /**
@@ -25,7 +25,7 @@ export function useTeamMembersPositions(
     let childXStart = rootNodeX - parentSubtreeWidth / 2;
 
     return rootNode.children.map((child) => {
-      const childSubtreeWidth = getSubtreeWidth(child, PERSON_WIDTH, personExpansionMap, TEAM_SIBLING_SPACING);
+      const childSubtreeWidth = getTeamWidth(child, PERSON_WIDTH, personExpansionMap, TEAM_SIBLING_SPACING);
       const childX = childXStart + childSubtreeWidth / 2;
       const childY = rootNodeY + PERSON_HEIGHT + TEAM_LEVEL_SPACING;
 

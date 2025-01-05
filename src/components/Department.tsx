@@ -17,27 +17,27 @@ interface DepartmentProps {
 
 function Department({ data, x = 0, y = 0, scale = 1 }: DepartmentProps) {
   const { teamMembersExpansionMap, toggleTeamMemberExpansion } = useTeamMembersExpansionMap(initTeamMembersExpansionMap(data.teamRootNode));
-  const { treeWidth, treeHeight } = useTeamDimensions(data.teamRootNode, teamMembersExpansionMap);
-  const [showTree, setShowTree] = useState(false);
-  const [orgDimensions, setOrgDimensions] = useState({
+  const { treeWidth: teamWidth, treeHeight: teamHeight } = useTeamDimensions(data.teamRootNode, teamMembersExpansionMap);
+  const [ showTeam, setShowTeam ] = useState(false);
+  const [ deptDimensions, setDeptDimensions ] = useState({
     width: DEPT_MIN_WIDTH,
     height: DEPT_MIN_HEIGHT,
   });
 
-  const handleOrgClick = () => {
-    setShowTree(!showTree);
+  const handleDepartmentContainerClick = () => {
+    setShowTeam(!showTeam);
   };
 
   useEffect(() => {
-    if (showTree) {
-      setOrgDimensions({
-        width: treeWidth + DEPT_PADDING,
-        height: treeHeight + DEPT_PADDING,
+    if (showTeam) {
+      setDeptDimensions({
+        width: teamWidth + DEPT_PADDING,
+        height: teamHeight + DEPT_PADDING,
       });
     } else {
-      setOrgDimensions({ width: DEPT_MIN_WIDTH, height: DEPT_MIN_HEIGHT });
+      setDeptDimensions({ width: DEPT_MIN_WIDTH, height: DEPT_MIN_HEIGHT });
     }
-  }, [treeWidth, treeHeight, showTree]);
+  }, [teamWidth, teamHeight, showTeam]);
 
   return (
     <motion.g
@@ -49,19 +49,19 @@ function Department({ data, x = 0, y = 0, scale = 1 }: DepartmentProps) {
     >
       <DepartmentContainer
         text={data.text}
-        x={x - orgDimensions.width / 2}
+        x={x - deptDimensions.width / 2}
         y={y - DEPT_PADDING}
-        width={orgDimensions.width}
-        height={orgDimensions.height}
-        onClick={handleOrgClick}
+        width={deptDimensions.width}
+        height={deptDimensions.height}
+        onClick={handleDepartmentContainerClick}
       />
 
       {/* Apparition de l'équipe au clic sur le département */}
       <AnimatePresence>
-        {showTree && (
+        {showTeam && (
           <motion.g
-            id={`tree-expansion-group-${data.id}`}
-            key={`tree-expansion-group-${data.id}`}
+            id={`team-expansion-group-${data.id}`}
+            key={`team-expansion-group-${data.id}`}
           >
             <Team
               rootNodeX={x}

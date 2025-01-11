@@ -10,8 +10,6 @@ interface TeamProps {
   rootNode: PersonData;
   rootNodeX: number;
   rootNodeY: number;
-  finalX?: number;
-  finalY?: number;
   expansionMap: Map<number, boolean>;
   toggleNodeExpansion: (nodeId: number) => void;
 }
@@ -20,8 +18,6 @@ function Team({
   rootNode,
   rootNodeX,
   rootNodeY,
-  finalX = rootNodeX,
-  finalY = rootNodeY,
   expansionMap,
   toggleNodeExpansion,
 }: TeamProps) {
@@ -40,10 +36,9 @@ function Team({
     <AnimatePresence>
       <motion.g 
         id={`team-${rootNode.id}`}
-        initial={{ x: rootNodeX, y: rootNodeY, opacity: 0 }} // Position initiale et invisible
-        animate={{ x: finalX, y: finalY, opacity: 1 }} // Position finale et visible
-        exit={{ x: rootNodeX, y: rootNodeY, opacity: 0 }} // Retourne à la position initiale et disparaît
-        transition={{ type: "spring", stiffness: 200, damping: 18 }}
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
+        exit={{ opacity: 0 }}
       >
         {/* Dessiner le nœud parent */}
         <Person
@@ -67,10 +62,8 @@ function Team({
               />
               <Team
                 rootNode={child}
-                rootNodeX={0}
-                rootNodeY={0}
-                finalX={rootNodeX + childX}
-                finalY={rootNodeY + childY}
+                rootNodeX={childX}
+                rootNodeY={childY}
                 expansionMap={expansionMap}
                 toggleNodeExpansion={toggleNodeExpansion}
               />

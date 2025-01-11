@@ -1,25 +1,30 @@
+import { useDepartmentsPositions } from "../hooks/useDepartmentsPositions";
+import { useDepartmentWidth } from "../hooks/useDepartmentWidth";
 import { DepartmentData } from "../types/department";
 import Department from "./Department";
 import { motion } from "framer-motion";
 
 interface OrganizationProps {
-  departmentsRootNode: DepartmentData;
+  rootNode: DepartmentData;
   x?: number;
   y?: number;
 }
 
-function Organization({ departmentsRootNode, x = 0, y = 0 }: OrganizationProps) {
+function Organization({ rootNode, x = 0, y = 0 }: OrganizationProps) {
   console.log("Rendering Organization")
+  const parentSubtreeWidth = useDepartmentWidth(rootNode);
+  const departmentsPositions = useDepartmentsPositions(rootNode, x, y, parentSubtreeWidth);
+
   return (
     <motion.g
-      initial={{ x, y, opacity: 1 }} // Position initiale et invisible
-      animate={{ x, y, opacity: 1 }} // Position finale et visible
+      initial={{ opacity: 0 }} // Position initiale et invisible
+      animate={{ opacity: 1 }} // Position finale et visible
     >
-      <Department data={departmentsRootNode} />
+      <Department data={rootNode} x={x} y={y}/>
 
-      {departmentsRootNode.children.map(( subteam, index ) => (
-        <g id={`subdept-${subteam.id}-${index}`} key={index}>
-            <Organization departmentsRootNode={subteam} x={x + (250 * (index+1))}/>
+      {departmentsPositions.map(( { child: subdept, x: subdeptX, y: subdeptY }, index ) => (
+        <g id={`subdept-${subdept.id}-${index}`} key={index}>
+            <Organization rootNode={subdept} x={subdeptX} y={subdeptY}/>
         </g>
       ))}
     </motion.g>

@@ -9,6 +9,8 @@ export const PERSON_TEXT_COLOR = DARKGREY;
 export const DEPT_MIN_WIDTH = 200;
 export const DEPT_MIN_HEIGHT = 50;
 export const DEPT_PADDING = 60;
+export const DEPT_LEVEL_SPACING = 30;
+export const DEPT_SIBLING_SPACING = 25
 
 export const VERTEX_STROKE_COLOR = GREY;
 

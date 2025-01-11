@@ -109,7 +109,7 @@ function App() {
   return (
     <RootSvg>
       <Controls>
-        <Organization departmentsRootNode={dept1} />
+        <Organization rootNode={dept1} />
       </Controls>
     </RootSvg>
   );

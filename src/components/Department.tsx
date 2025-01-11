@@ -44,11 +44,11 @@ function Department({ data, x = 0, y = 0, scale = 1 }: DepartmentProps) {
       id={`dept-${data.id}`}
       data-testid={`dept-${data.id}`}
       className="department"
-      initial={{ x: x + window.innerWidth / 2, y: y, scale: 0 }}
-      animate={{ x: x + window.innerWidth / 2, y: y, scale }}
+      initial={{ scale: 0 }}
+      animate={{ scale }}
     >
       <DepartmentContainer
-        text={data.text}
+        text={`${data.text} (${x}, ${y})`}
         x={x - deptDimensions.width / 2}
         y={y - DEPT_PADDING}
         width={deptDimensions.width}

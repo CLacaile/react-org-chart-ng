@@ -59,7 +59,7 @@ function Person({ data, x, y, onClick }: PersonProps) {
       />
       {/* Poste */}
       <TextWrap
-        text="Poste"
+        text={`(${x},${y})`}
         color={PERSON_TEXT_COLOR}
         font="Gabarito"
         size="small"
